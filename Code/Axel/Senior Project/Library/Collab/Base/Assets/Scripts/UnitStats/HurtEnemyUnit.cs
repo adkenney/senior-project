@@ -5,57 +5,29 @@ using UnityEngine;
 public class HurtEnemyUnit : TurnManager
 {
     static int currentDamage;
-    static UnitStats currentPlayerUnit;
-    static EnemyUnitStats enemy;
-    static bool attackingTurn;
-    private TurnManager currentUnit;
-
-    // Start is called before the first frame update
-    void Start()
+  
+    public static void Attack(RaycastHit2D other)
     {
-        currentPlayerUnit = FindObjectOfType<UnitStats>();
-        enemy = FindObjectOfType<EnemyUnitStats>();
-        currentUnit = FindObjectOfType<TurnManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public static void Attack()
-    {
-        if (Input.GetMouseButtonUp(0))
+        if(currentUnit.tag == "Player")
         {
+            UnitStats player = currentUnit.GetComponent<UnitStats>();
+            EnemyUnitStats enemy = other.collider.GetComponent<EnemyUnitStats>();
 
-            Vector2 ray2dOrigin;
-            Vector2 ray2dDirection;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            ray2dOrigin = ray.origin;
-            ray2dDirection = ray.direction;
-            RaycastHit2D hit = Physics2D.Raycast(ray2dOrigin, ray2dDirection);
-
-            if (hit.collider)
+            if (player.unitAttack <= enemy.unitDefense)
             {
-                if (hit.collider.gameObject.tag == "Enemy")
-                {
-                    enemy = hit.collider.gameObject.GetComponent<EnemyUnitStats>();
-                    if (currentPlayerUnit.unitAttack <= enemy.unitDefense)
-                    {
-                        currentDamage = 1;
-                    }
-                    else
-                    {
-                        currentDamage = currentPlayerUnit.unitAttack - enemy.unitDefense;
-                    }
-                    hit.collider.gameObject.GetComponent<HealthManager>().HurtUnit(currentDamage);
-                    Debug.Log("Hit " + hit.collider.gameObject.name + " for " + currentDamage + " damage!");
-                }
+                currentDamage = 1;
             }
-          
+            else
+            {
+                currentDamage = player.unitAttack - enemy.unitDefense;
+            }
+            enemy.GetComponent<EnemyHealth>().TakeDamage(currentDamage);
         }
+        
+    }
+
+    public void Attack2(RaycastHit2D other)
+    {
 
     }
 

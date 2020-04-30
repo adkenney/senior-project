@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 public class ToLevel1 : MonoBehaviour
 {
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D collision)
+     
+    
+    void OnTriggerEnter2D(Collider2D collision)
     {
-               SceneManager.LoadScene("Movement", LoadSceneMode.Single);
+        SceneManager.LoadScene("Movement", LoadSceneMode.Single);
+        //Debug.Log("Enter Level one");
 
     }
 }

@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class HurtEnemyUnit : TurnManager
 {
-
     static int currentDamage;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+  
     public static void Attack(RaycastHit2D other)
     {
         if(currentUnit.tag == "Player")
         {
+            
             UnitStats player = currentUnit.GetComponent<UnitStats>();
             EnemyUnitStats enemy = other.collider.GetComponent<EnemyUnitStats>();
 
@@ -34,10 +22,25 @@ public class HurtEnemyUnit : TurnManager
             {
                 currentDamage = player.unitAttack - enemy.unitDefense;
             }
-            enemy.GetComponent<HealthManager>().HurtUnit(currentDamage);
-            Debug.Log("Hit " + enemy.name + " for " + currentDamage + " damage!");
+            enemy.GetComponent<EnemyHealth>().TakeDamage(currentDamage);
+        }else if(currentUnit.tag == "Enemy")
+        {
+            EnemyUnitStats enemy = currentUnit.GetComponent<EnemyUnitStats>();
+            UnitStats player = other.collider.GetComponent<UnitStats>();
+            
+
+            if (enemy.unitAttack <= player.unitDefense)
+            {
+                currentDamage = 1;
+            }
+            else
+            {
+                currentDamage = enemy.unitAttack - player.unitDefense;
+            }
+            player.GetComponent<PlayerHealth>().TakeDamage(currentDamage);
         }
         
     }
+    
 
 }

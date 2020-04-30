@@ -17,10 +17,18 @@ public class Tiles : MonoBehaviour
     public bool visited = false;
     public Tiles parent = null;
     public int distance = 0;
+    public bool attackMode = false;
+
+
 
     public GameObject[] tiles;
-
+    Color32 color = new Color32(50, 148, 162, 255);
     public float originOffset = 0.5f;
+
+    //Needed A*
+    public float f = 0;
+    public float g = 0;
+    public float h = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -33,12 +41,17 @@ public class Tiles : MonoBehaviour
     {
         if (current)
         {
-            GetComponent<SpriteRenderer>().material.color = Color.white;
+            GetComponent<SpriteRenderer>().material.color = Color.yellow;
             
         }
         else if (target)
         {
             GetComponent<SpriteRenderer>().material.color = Color.green;
+
+        }
+        else if (selectable && attackMode)
+        {
+            GetComponent<SpriteRenderer>().material.color = color;
 
         }
         else if (selectable)
@@ -60,25 +73,28 @@ public class Tiles : MonoBehaviour
         current = false;
         target = false;
         selectable = false;
-
+        attackMode = false;
         visited = false;
         parent = null;
         distance = 0;
 
+        f = g = h = 0;
+
     }
 
-    public void FindNeighbor()
+    public void FindNeighbor(Tiles target)//added move and target
     {
         Reset();
 
-        CheckTile(Vector2.left);
-        CheckTile(Vector2.right);
-        CheckTile(Vector2.up);
-        CheckTile(Vector2.down);
+        CheckTile(Vector2.left, target);
+        CheckTile(Vector2.right, target);
+        CheckTile(Vector2.up, target);
+        CheckTile(Vector2.down, target);
 
     }
 
-    public void CheckTile(Vector2 direction)
+    //This function might need to include the raycast code 12:15
+    public void CheckTile(Vector2 direction, Tiles target)
     {
 
         
@@ -88,12 +104,16 @@ public class Tiles : MonoBehaviour
         {
             if(item.tag == "Tile")
             {
+                LayerMask obstacle = LayerMask.GetMask("obstactle");
                 Tiles tile = item.GetComponent<Tiles>();
-
-                if (tile != null && tile.walkable)
+                RaycastHit2D hit = Physics2D.Raycast(tile.transform.position, Vector2.zero, 0,obstacle);
+                if (tile != null && tile.walkable && !hit)
                 {
 
-                    adjacencyList.Add(tile);
+                    
+                     adjacencyList.Add(tile);
+                    
+                    
                 }
             }
             

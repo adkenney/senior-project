@@ -53,4 +53,32 @@ public class HurtUnit : MonoBehaviour
             other.gameObject.GetComponent<HealthManager>().HurtUnit(currentDamage);
         }
     }*/
+
+    public void Attack(Tiles tile)
+    {
+        LayerMask mask = LayerMask.GetMask("character");
+        RaycastHit hit;
+        if(Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1,mask))
+        {
+            /*if (hit.collider.tag == "Player")
+            {
+                UnitStats player = hit.collider.GetComponent<UnitStats>();
+                EnemyUnitStats enemy = other.collider.GetComponent<EnemyUnitStats>();
+
+                if (player.unitAttack <= enemy.unitDefense)
+                {
+                    currentDamage = 1;
+                }
+                else
+                {
+                    currentDamage = player.unitAttack - enemy.unitDefense;
+                }
+                enemy.GetComponent<PlayerHealth>().TakeDamage(currentDamage);
+                Debug.Log("Hit " + enemy.name + " for " + currentDamage + " damage!");
+            }*/
+
+            Debug.Log(hit.collider.tag);
+        }
+        
+    }
 }

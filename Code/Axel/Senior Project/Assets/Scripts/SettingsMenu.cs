@@ -23,8 +23,8 @@ public class SettingsMenu : MonoBehaviour
             string option = resolutions[i].width+ " X " + resolutions[i].height;
             options.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width 
-            && resolutions[i].height == Screen.currentResolution.height)
+            if(resolutions[i].width == Screen.width 
+            && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
@@ -37,7 +37,7 @@ public class SettingsMenu : MonoBehaviour
     public void setVolume(float volume)
     {
         Debug.Log(volume);
-        audioMixer.SetFloat("volume",volume);
+        audioMixer.SetFloat("volume", volume);
     }
 
     public void setQuality(int qualityIndex)
@@ -61,4 +61,10 @@ public class SettingsMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Movement", LoadSceneMode.Single);
     }
+
+    public void GoBackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu2", LoadSceneMode.Single);
+    }
+
 }

@@ -5,31 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 41606e99f234ed54e8747ffdc4466d4b
+    path: Assets/Scenes/MainMenu2.unity
+    guid: d2930af9c0cebec4988ca51a158d24a2
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: f70d10b8e0d3b744fb10e523c8de87c8
   - enabled: 1
     path: Assets/Scenes/Movement.unity
     guid: 518020d49362b2849a51993bb55137e0
   - enabled: 1
     path: Assets/Scenes/TestBattleArea.unity
     guid: 10d3a9ab59595c64288ae85e41306007
-  - enabled: 1
-    path: Assets/Scenes/TempLevel3.unity
-    guid: 6ae87361b87961e468b90a94ca56c0dc
-  - enabled: 1
-    path: Assets/Scenes/LevelSelect.unity
-    guid: f70d10b8e0d3b744fb10e523c8de87c8
-  - enabled: 1
-    path: Assets/Scenes/TempLevel2.unity
-    guid: 735da28113d5a064091ce3f8b12a5dff
-  - enabled: 1
-    path: Assets/Scenes/TempLevel1.unity
-    guid: 5ce596aca7b197441b8b89bd458f096f
-  - enabled: 1
-    path: Assets/Scenes/SettingsMenu.unity
-    guid: 551050184f4829349adda9df5bc6736e
   m_configObjects: {}

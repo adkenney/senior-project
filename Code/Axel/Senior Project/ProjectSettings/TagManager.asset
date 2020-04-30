@@ -9,6 +9,9 @@ TagManager:
   - World1
   - World2
   - SceneHandler
+  - ShowOnPause
+  - EnemyGroup
+  - PlayerGroup
   layers:
   - Default
   - TransparentFX
@@ -21,8 +24,8 @@ TagManager:
   - Sprites
   - character
   - obstactle
-  - 
-  - 
+  - ground
+  - Damage
   - 
   - 
   - 
@@ -48,4 +51,10 @@ TagManager:
     locked: 0
   - name: Sprites
     uniqueID: 2742643459
+    locked: 0
+  - name: Damage
+    uniqueID: 823887205
+    locked: 0
+  - name: ground
+    uniqueID: 2819644505
     locked: 0
