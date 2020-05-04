@@ -19,7 +19,6 @@ public class MainMenu : MonoBehaviour
     public void PlayGame(){
        Debug.Log(SceneManager.GetSceneByName("Movement"));
         SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
-        //SceneManager.LoadScene("Movement", LoadSceneMode.Single);
     }
 
     public void QuitGame()
